@@ -4,11 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare:materials": "node scripts/prepare-materials.mjs",
-    "dev": "npm run prepare:materials && vite",
-    "build": "npm run prepare:materials && tsc --noEmit && vite build",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "node --test scripts/prepare-materials.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

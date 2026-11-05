@@ -9,6 +9,5 @@ const base = process.env.VITE_BASE_PATH || (repo ? `/${repo}/` : '/')
 export default defineConfig({
   plugins: [react()],
   base,
-  server: { allowedHosts: ['terminal.local'] },
   build: { target: 'es2022', sourcemap: false },
 })

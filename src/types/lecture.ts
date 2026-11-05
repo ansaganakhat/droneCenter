@@ -3,7 +3,7 @@ export type Material = {
   description?: string
   path?: string
   url?: string
-  type?: 'pdf' | 'ppt' | 'pptx' | 'html' | 'mp4' | 'webm' | 'youtube' | 'glb' | 'gltf' | 'link'
+  type?: 'pdf' | 'pptx' | 'mp4' | 'youtube' | 'glb' | 'gltf' | 'link'
   embeddable?: boolean
 }
 export type MaterialGroups = {

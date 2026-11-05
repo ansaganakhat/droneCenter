@@ -10,23 +10,16 @@ function materialType(material: Material): string {
   if (material.url && youtubeEmbed(material.url)) return 'youtube'
   const path = (material.path || material.url || '').split('?')[0].toLowerCase()
   if (path.endsWith('.pdf')) return 'pdf'
-  if (path.endsWith('.ppt')) return 'ppt'
   if (path.endsWith('.pptx')) return 'pptx'
-  if (path.endsWith('.html') || path.endsWith('.htm')) return 'html'
   if (path.endsWith('.mp4')) return 'mp4'
-  if (path.endsWith('.webm')) return 'webm'
   if (path.endsWith('.glb')) return 'glb'
   if (path.endsWith('.gltf')) return 'gltf'
   return 'link'
 }
 
-function EmptyState({ name, kind }: { name: string; kind: keyof MaterialGroups }) {
-  const formats = kind === 'presentations' ? ['PDF', 'PowerPoint', 'Веб-презентация'] : kind === 'videos' ? ['MP4', 'WebM', 'YouTube'] : []
-  const Icon = kind === 'videos' ? Film : FileText
-  return <div className="empty-material"><div className="empty-material-icon"><Icon size={21} /></div>
-    <div><strong>{kind === 'videos' ? 'Бейнематериалдар дайындалуда' : 'Оқу материалы әзірленуде'}</strong><p>{name} осы бөлімде жарияланады.</p>
-      {formats.length > 0 && <div className="material-formats">{formats.map(format => <span key={format}>{format}</span>)}</div>}
-    </div>
+function EmptyState({ name }: { name: string }) {
+  return <div className="empty-material"><div className="empty-material-icon"><FileText size={21} /></div>
+    <div><strong>Оқу материалы әзірленуде</strong><p>{name} кейін осы бөлімде жарияланады.</p></div>
   </div>
 }
 
@@ -35,15 +28,6 @@ function SingleMaterial({ material }: { material: Material }) {
   const type = materialType(material)
   if (!url) return <div className="invalid-material">«{material.title}» материалының сілтемесі көрсетілмеген.</div>
   if (type === 'glb' || type === 'gltf') return <ModelViewer url={url} title={material.title} />
-  if (type === 'html') return (
-    <div className="resource-detail">
-      <div className="resource-head"><div><Presentation size={18} /><strong>{material.title}</strong></div>
-        <a href={url} target="_blank" rel="noopener noreferrer">Жеке бетте ашу <ExternalLink size={15} /></a></div>
-      {material.description && <p className="resource-description">{material.description}</p>}
-      <iframe title={material.title} src={url} className="presentation-frame" loading="lazy" allowFullScreen />
-      <div className="resource-hint">Презентацияны осы жерден қараңыз немесе «Жеке бетте ашу» сілтемесін пайдаланыңыз.</div>
-    </div>
-  )
   if (type === 'pdf') return (
     <div className="resource-detail">
       <div className="resource-head"><div><FileText size={18} /><strong>{material.title}</strong></div>
@@ -52,12 +36,10 @@ function SingleMaterial({ material }: { material: Material }) {
       <div className="resource-hint">PDF ашылмаса, «Толық ашу» сілтемесін пайдаланыңыз.</div>
     </div>
   )
-  if (type === 'mp4' || type === 'webm') return <div className="resource-detail">
-    <div className="resource-head"><div><Film size={18} /><strong>{material.title}</strong></div>
-      <a href={url} target="_blank" rel="noopener noreferrer">Жеке ашу <ExternalLink size={15} /></a></div>
-    {material.description && <p className="resource-description">{material.description}</p>}
-    <video className="video-frame" controls playsInline preload="metadata"><source src={url} type={`video/${type}`} />
-      Браузер бейнені көрсете алмады. «Жеке ашу» сілтемесін пайдаланыңыз.</video>
+  if (type === 'mp4') return <div className="resource-detail">
+    <div className="resource-head"><div><Film size={18} /><strong>{material.title}</strong></div></div>
+    <video className="video-frame" controls preload="metadata"><source src={url} type="video/mp4" />
+      Браузер MP4 бейнесін көрсете алмады.</video>
   </div>
   if (type === 'youtube') {
     const embed = youtubeEmbed(material.url || '')
@@ -72,13 +54,13 @@ function SingleMaterial({ material }: { material: Material }) {
       <div className="resource-hint">Сайт iframe көрсетуге тыйым салса, жоғарыдағы сыртқы сілтемені пайдаланыңыз.</div>
     </div>
   )
-  return <ResourceLink url={url} material={material} download={type === 'pptx' || type === 'ppt'} />
+  return <ResourceLink url={url} material={material} download={type === 'pptx'} />
 }
 function ResourceLink({ url, material, download = false }: { url: string; material: Material; download?: boolean }) {
   const Icon = download ? Download : ExternalLink
   return <a className="resource-link" href={url} target="_blank" rel="noopener noreferrer" download={download ? '' : undefined}>
     <span className="resource-link-icon">{download ? <Presentation size={21} /> : <Link2 size={21} />}</span>
-    <span className="resource-link-copy"><strong>{material.title}</strong><small>{material.description || (download ? 'PowerPoint файлын жүктеу' : 'Материалды ашу')}</small></span>
+    <span className="resource-link-copy"><strong>{material.title}</strong><small>{material.description || (download ? 'PPTX файлын жүктеу' : 'Материалды ашу')}</small></span>
     <Icon size={17} />
   </a>
 }
@@ -93,6 +75,6 @@ export function MaterialSection({ title, subtitle, kind, materials, children }: 
     {children}
     {materials?.length ? <div className="material-stack">{materials.map((material, index) =>
       <SingleMaterial key={`${material.path || material.url || material.title}-${index}`} material={material} />)}</div>
-      : !children ? <EmptyState name={title} kind={kind} /> : <p className="subtle-material-note">Қосымша 3D материалдар кейін жүктеледі.</p>}
+      : !children ? <EmptyState name={title} /> : <p className="subtle-material-note">Қосымша 3D материалдар кейін жүктеледі.</p>}
   </section>
 }

@@ -25,7 +25,7 @@ export function youtubeEmbed(url: string): string | null {
     let id = ''
     if (parsed.hostname === 'youtu.be') id = parsed.pathname.slice(1)
     else if (['www.youtube.com', 'youtube.com', 'm.youtube.com'].includes(parsed.hostname)) {
-      id = /^\/(embed|shorts|live)\//.test(parsed.pathname) ? parsed.pathname.split('/')[2] : (parsed.searchParams.get('v') ?? '')
+      id = parsed.pathname.startsWith('/embed/') ? parsed.pathname.split('/')[2] : (parsed.searchParams.get('v') ?? '')
     }
     if (!/^[a-zA-Z0-9_-]{11}$/.test(id)) return null
     return `https://www.youtube-nocookie.com/embed/${id}`

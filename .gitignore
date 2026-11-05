@@ -1,6 +1,5 @@
 node_modules/
 dist/
-public/data/lectures.generated.json
 .DS_Store
 .env
 *.local

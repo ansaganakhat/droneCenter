@@ -7,7 +7,7 @@ export function useLectures(): State {
   const [state, setState] = useState<State>({ data: null, loading: true, error: null })
   useEffect(() => {
     const controller = new AbortController()
-    fetch(assetUrl('data/lectures.generated.json'), { signal: controller.signal })
+    fetch(assetUrl('data/lectures.json'), { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         return response.json() as Promise<LectureDatabase>

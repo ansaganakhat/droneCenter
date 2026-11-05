@@ -19,17 +19,16 @@
         "Білім алушы ПАЖ түрлерін ажыратады, олардың қолданылу салаларын сипаттайды және оператордың негізгі міндеттері мен жауапкершілігін түсіндіреді."
       ],
       "materials": {
-        "presentations": [
-          {
+        "presentations": [],
+        "videos": [],
+        "models": [],
+        "virtualTours": [ {
             "title": "1-дәріс. ПАЖ туралы кіріспе — 3D презентация",
             "type": "html",
             "path": "content/lecture-01/index.html",
             "description": "Интерактивті 3D веб-презентация"
-          }
+  }          
         ],
-        "videos": [],
-        "models": [],
-        "virtualTours": [],
         "practices": [],
         "additional": []
       }
