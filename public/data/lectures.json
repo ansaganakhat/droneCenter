@@ -19,15 +19,36 @@
         "Білім алушы ПАЖ түрлерін ажыратады, олардың қолданылу салаларын сипаттайды және оператордың негізгі міндеттері мен жауапкершілігін түсіндіреді."
       ],
       "materials": {
-        "presentations": [],
-        "videos": [],
+        "presentations": [
+          {
+            "title": "Тест презентациясы: Әуе құқығы",
+            "type": "pdf",
+            "path": "content/lecture-01/test-slides.pdf",
+            "description": "Уақытша тест материалы. Кейін дайын презентациямен ауыстырылады."
+          },
+          {
+            "title": "Тест презентациясын жүктеу (PowerPoint)",
+            "type": "pptx",
+            "path": "content/lecture-01/test-slides.pptx",
+            "description": "Жіберілген бастапқы PowerPoint файлы. Тест нұсқасы."
+          }
+        ],
+        "videos": [
+          {
+            "title": "Тест бейнематериалы",
+            "type": "mp4",
+            "path": "content/lecture-01/test-video.mp4",
+            "description": "Уақытша тест видеосы. Кейін дайын бейнематериалмен ауыстырылады."
+          }
+        ],
         "models": [],
-        "virtualTours": [ {
+        "virtualTours": [
+          {
             "title": "1-дәріс. ПАЖ туралы кіріспе — 3D презентация",
             "type": "html",
             "path": "content/lecture-01/index.html",
             "description": "Интерактивті 3D веб-презентация"
-  }          
+          }
         ],
         "practices": [],
         "additional": []
