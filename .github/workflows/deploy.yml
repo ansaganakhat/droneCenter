@@ -1,4 +1,4 @@
-name: Deploy ENU DroneLab to GitHub Pages
+name: Deploy IDSAI Drone Center to GitHub Pages
 
 on:
   push:

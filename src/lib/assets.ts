@@ -1,6 +1,6 @@
 import type { MaterialGroups } from '../types/lecture'
 
-/** Vite's BASE_URL is needed when the app lives under /ENU-DroneLab/ on Pages. */
+/** Vite's BASE_URL is needed when the app lives under /droneCenter/ on Pages. */
 export function assetUrl(pathOrUrl?: string): string {
   if (!pathOrUrl) return ''
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
